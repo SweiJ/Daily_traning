@@ -5,6 +5,16 @@
       "taskLabel": "任务-DailyCodetraning",
       "appliesTo": "DailyCodetraning/",
       "type": "launch"
+    },
+    {
+      "taskLabel": "任务-DaliyCode",
+      "appliesTo": "DaliyCode/",
+      "type": "launch"
+    },
+    {
+      "taskLabel": "任务-README",
+      "appliesTo": "DaliyCode/README.md",
+      "type": "launch"
     }
   ]
 }
