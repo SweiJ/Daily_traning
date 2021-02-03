@@ -26,13 +26,13 @@ int listInsert(SLNode* L, int i, ElemType e) // 在第 i 个位置插入元素 e
 	SLNode* p = NULL; // 该指针用于指向要存放元素的位置
 	int j = 0; // 当前p指向的位置
 	p = L; // L指向头结点
-	while (p->next != NULL && j < i - 1) // 当i不在第一个时，p通过循环找到对应i的位置
+	while (p != NULL && j < i - 1) // 当i不在第一个时，p通过循环找到对应i的位置
 	{
 		p = p->next;
 		j++;
 	}
-	//if (p == NULL)
-	//	return 0;
+	if (p == NULL)
+		return 0;
 	SLNode* NewNode = (SLNode*)malloc(sizeof(SLNode));
 	NewNode->Data = e;
 	NewNode->next = p->next; // 新结点指向以前p指向的结点
