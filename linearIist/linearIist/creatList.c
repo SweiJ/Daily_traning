@@ -22,10 +22,12 @@ NodePoint listInitiate()
 // 单链表的创建一 头插法建立单链表
 void LinkListCreatH(SLNode* L)
 {
+	printf("如果完成输入则键入三次ctrl+z\n");
+	printf("输入你要输入的值：");
 	ElemType Elem; // 要插入的元素
 	while (scanf("%d", &Elem) != EOF)
 	{
-		printf("ceshi");
+		printf("输入你要输入的值或退出：");
 		SLNode* currentNodeH; // 当前结点
 		currentNodeH = (SLNode*)malloc(sizeof(SLNode));
 		currentNodeH->Data = Elem; // 元素放在当前结点的数据域
@@ -40,8 +42,11 @@ void LinkListCreatT(SLNode* L)
     SLNode * priorNode; // 相对当前结点的前一个结点
 	priorNode = L; // 初始为L头结点
     ElemType Elem;
+	printf("如果完成输入则键入三次ctrl+z\n");
+	printf("输入你要输入的值：");
     while (scanf("%d", &Elem) != EOF)
     {
+		printf("输入你要输入的值或退出：");
         SLNode * currentNodeT; // 当前要插入结点
 		currentNodeT = (SLNode*)malloc(sizeof(SLNode));
 		currentNodeT->Data = Elem;
