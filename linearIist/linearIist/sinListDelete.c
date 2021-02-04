@@ -1,0 +1,117 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+typedef int ElemType;
+
+typedef struct Node
+{
+	ElemType Data; // 数据域
+	struct Node* next; // 指针域 存储直接后继结点的存储位置
+} SLNode, * NodePoint;
+
+NodePoint listInitiate()
+{
+	SLNode* L = NULL;
+	L = (SLNode*)malloc(sizeof(SLNode));
+	if (!L)
+		printf("申请空间失败！");
+	L->next = NULL;
+	return L;
+}
+
+// 单链表的创建一 头插法建立单链表
+void LinkListCreatH(SLNode* L)
+{
+	printf("如果完成输入则键入三次ctrl+z\n");
+	printf("输入你要输入的值：");
+	ElemType Elem; // 要插入的元素
+	while (scanf("%d", &Elem) != EOF)
+	{
+		printf("输入你要输入的值或退出：");
+		SLNode* currentNodeH = NULL; // 当前结点
+		currentNodeH = (SLNode*)malloc(sizeof(SLNode));
+		currentNodeH->Data = Elem; // 元素放在当前结点的数据域
+		currentNodeH->next = L->next; // 当前的指针域指向之前链表头结点的指针域
+		L->next = currentNodeH; // 之前链表的头结点指向当前结点
+	}
+}
+
+// 单链表的创建二 尾插法建立单链表
+void LinkListCreatT(SLNode* L)
+{
+	SLNode* priorNode; // 相对当前结点的前一个结点
+	priorNode = L; // 初始为L头结点
+	ElemType Elem;
+	printf("如果完成输入则键入三次ctrl+z\n");
+	printf("输入你要输入的值：");
+	while (scanf("%d", &Elem) != EOF)
+	{
+		printf("输入你要输入的值或退出：");
+		SLNode* currentNodeT; // 当前要插入结点
+		currentNodeT = (SLNode*)malloc(sizeof(SLNode));
+		currentNodeT->Data = Elem;
+		//p->next = NULL;
+		priorNode->next = currentNodeT; // 前一个结点指向当前结点
+		priorNode = currentNodeT; // 将当前结点改为前一个结点，便于插入下一个结点
+	}
+	priorNode->next = NULL; // 链表的结尾
+}
+
+void output(NodePoint L)//遍历
+{
+	SLNode* p;
+	for (p = L->next; p != NULL; p = p->next)
+	{
+		printf("%d   ", p->Data);
+	}
+	printf("\n");
+}
+
+// 删除链表L中的第i个元素并且用elem作为被删除元素的接收值
+ElemType ListDelete(SLNode* L, int i, ElemType* elem)
+{
+	if (i < 1) // 第0个位置的是头指针位置
+		return 0;
+	SLNode* p = NULL;
+	int j = 0;
+	p = L;
+	while (p != NULL && p->next && j < i - 1)
+	{
+		p = p->next;
+		j++;
+	}
+	if (p == NULL || p->next == NULL) // 如果当前结点或者要删除位置的结点为空则跳出
+		return 0;
+	SLNode* q = p->next; // 要删除位置结点赋给指针q
+	*elem = q->Data; // 用elem接收删除结点的值
+	if(q->next != NULL) // 如果要删除结点的下一个结点不为空则将删除前的结点指向下一个结点
+		p->next = q->next;
+	free(q); // 释放删除结点
+	return 1;
+}
+
+void DestoryList(SLNode* L)
+{
+	SLNode* p;
+	while (L)
+	{
+		p = L->next;
+		free(L);
+		L = p;
+	}
+	L = NULL;
+}
+
+int main()
+{
+	int location = 0, Elem = 0;
+	SLNode* head = listInitiate();
+	LinkListCreatH(head);
+	output(head);
+	printf("输入你要删除元素的位置:\n");
+	scanf("%d", &location);
+	ListDelete(head, location, &Elem);
+	printf("%d 已删除\n", Elem);
+	output(head);
+	DestoryList(head);
+}
