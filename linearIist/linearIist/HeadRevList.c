@@ -47,7 +47,7 @@ RevList* creatlist(int  Elem[])
 void outlist(RevList* phead)
 {
     RevList* cur;
-    cur = phead;
+    cur = phead->next;
     if (cur == NULL)  printf("The list is NULL!\n");
     else
     {
